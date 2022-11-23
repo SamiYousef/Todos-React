@@ -1,14 +1,16 @@
+import React from "react";
+
 interface ILink {
   disabled: boolean;
   onClick: () => void;
   children: JSX.Element;
 }
 
-export default function Link({ disabled, onClick, children }: ILink) {
+const Link: React.FC<ILink> = ({ disabled, onClick, children }) => {
   return (
     <button
       style={{
-        marginLeft: "4px"
+        marginLeft: "4px",
       }}
       disabled={disabled}
       onClick={onClick}
@@ -16,4 +18,6 @@ export default function Link({ disabled, onClick, children }: ILink) {
       {children}
     </button>
   );
-}
+};
+
+export default Link;
