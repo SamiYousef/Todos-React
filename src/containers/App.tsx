@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import AddTodo from "../components/AddTodo";
 import TodoList from "../components/TodoList";
@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import { ITodo, LinkType } from "../types";
 import "../styles.css";
 
-export default function App() {
+const App: React.FC = () => {
   const [todos, setTodo] = useState<ITodo[]>([]);
   const [activeLink, setActiveLink] = useState<LinkType>(LinkType.All);
 
@@ -16,8 +16,8 @@ export default function App() {
       {
         id: uuidv4(),
         text: todo,
-        completed: false
-      }
+        completed: false,
+      },
     ]);
   };
 
@@ -52,4 +52,6 @@ export default function App() {
       <Footer activeLink={activeLink} linkClickHandler={linkClickHandler} />
     </div>
   );
-}
+};
+
+export default App;

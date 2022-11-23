@@ -1,10 +1,10 @@
-import { FormEvent, useRef } from "react";
+import React, { FormEvent, useRef } from "react";
 
 interface IAddTodo {
   addTodo: (todo: string) => void;
 }
 
-export default function AddTodo({ addTodo }: IAddTodo) {
+const AddTodo: React.FC<IAddTodo> = ({ addTodo }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onSubmitTodo = (event: FormEvent<HTMLFormElement>) => {
@@ -24,4 +24,6 @@ export default function AddTodo({ addTodo }: IAddTodo) {
       </form>
     </div>
   );
-}
+};
+
+export default AddTodo;

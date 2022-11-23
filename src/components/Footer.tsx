@@ -1,12 +1,13 @@
 import Link from "./Link";
 import { LinkType } from "../types";
+import React from "react";
 
 interface IFooter {
   activeLink: LinkType;
   linkClickHandler: (link: LinkType) => void;
 }
 
-export default function Footer({ activeLink, linkClickHandler }: IFooter) {
+const Footer: React.FC<IFooter> = ({ activeLink, linkClickHandler }) => {
   return (
     <div>
       <span>Show: </span>
@@ -36,4 +37,6 @@ export default function Footer({ activeLink, linkClickHandler }: IFooter) {
       </Link>
     </div>
   );
-}
+};
+
+export default Footer;

@@ -1,9 +1,9 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import * as ReactDOMClient from "react-dom/client";
 
 import App from "./containers/App";
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById("root") as Element;
 const root = ReactDOMClient.createRoot(rootElement);
 
 root.render(
