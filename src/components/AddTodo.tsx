@@ -1,10 +1,9 @@
 import React, { FormEvent, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../actions";
 
-interface IAddTodo {
-  addTodo: (todo: string) => void;
-}
-
-const AddTodo: React.FC<IAddTodo> = ({ addTodo }) => {
+const AddTodo: React.FC = () => {
+  const dispatch = useDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onSubmitTodo = (event: FormEvent<HTMLFormElement>) => {
@@ -12,7 +11,7 @@ const AddTodo: React.FC<IAddTodo> = ({ addTodo }) => {
     if (!inputRef.current?.value.trim()) {
       return;
     }
-    addTodo(inputRef.current.value);
+    dispatch(addTodo(inputRef.current.value));
     inputRef.current.value = "";
   };
 

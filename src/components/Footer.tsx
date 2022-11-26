@@ -1,37 +1,32 @@
 import Link from "./Link";
 import { LinkType } from "../types";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveLink } from "../actions";
 
-interface IFooter {
-  activeLink: LinkType;
-  linkClickHandler: (link: LinkType) => void;
-}
+const Footer: React.FC = () => {
+  const dispatch = useDispatch();
+  const linkHandler = (link: LinkType) => dispatch(setActiveLink(link));
+  const activeLink = useSelector((store: { link: LinkType }) => store.link);
 
-const Footer: React.FC<IFooter> = ({ activeLink, linkClickHandler }) => {
   return (
     <div>
       <span>Show: </span>
       <Link
         disabled={activeLink === LinkType.All}
-        onClick={() => {
-          linkClickHandler(LinkType.All);
-        }}
+        onClick={() => linkHandler(LinkType.All)}
       >
         <span>{LinkType[0]}</span>
       </Link>
       <Link
         disabled={activeLink === LinkType.Active}
-        onClick={() => {
-          linkClickHandler(LinkType.Active);
-        }}
+        onClick={() => linkHandler(LinkType.Active)}
       >
         <span>{LinkType[1]}</span>
       </Link>
       <Link
         disabled={activeLink === LinkType.Completed}
-        onClick={() => {
-          linkClickHandler(LinkType.Completed);
-        }}
+        onClick={() => linkHandler(LinkType.Completed)}
       >
         <span>{LinkType[2]}</span>
       </Link>

@@ -1,22 +1,35 @@
 import React from "react";
-import { ITodo } from "../types";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTodo } from "../actions";
+import { ITodo, LinkType } from "../types";
 
-interface ITodoList {
-  todos: ITodo[];
-  toggleTodo: (id: string) => void;
-}
+const TodoList: React.FC = () => {
+  const dispatch = useDispatch();
+  const todos = useSelector((store: { todos: ITodo[] }) => store.todos);
+  const activeLink = useSelector((store: { link: LinkType }) => store.link);
+  const toggleTodoItem = (id: string) => dispatch(toggleTodo(id));
 
-const TodoList: React.FC<ITodoList> = ({ todos, toggleTodo }) => {
+  const todoList = () => {
+    switch (activeLink) {
+      case LinkType.Completed:
+        return todos.filter((todo) => todo.completed);
+      case LinkType.Active:
+        return todos.filter((todo) => !todo.completed);
+      default:
+        return todos;
+    }
+  };
+
   return (
     <ul>
-      {todos.map((item: ITodo) => (
+      {todoList().map((item: ITodo) => (
         <li
           style={{
             textDecoration: item.completed ? "line-through" : "none",
             textAlign: "left",
           }}
           key={item.id}
-          onClick={() => toggleTodo(item.id)}
+          onClick={() => toggleTodoItem(item.id)}
         >
           {item.text}
         </li>
